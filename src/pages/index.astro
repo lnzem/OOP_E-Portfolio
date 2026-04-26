@@ -67,27 +67,37 @@ import { ABOUT_ME } from "@/consts";
 </style>
 
 <script is:inline>
-  const content = document.querySelector('.intro-content');
-  if (content) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            content.classList.remove('exit');
-            content.classList.add('visible');
-          } else {
-            const rect = content.getBoundingClientRect();
-            if (rect.top < 0) {
-              content.classList.add('exit');
-            } else {
-              content.classList.remove('visible');
+  function initIntro() {
+    const content = document.querySelector('.intro-content');
+    if (content) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
               content.classList.remove('exit');
+              content.classList.add('visible');
+            } else {
+              const rect = content.getBoundingClientRect();
+              if (rect.top < 0) {
+                content.classList.add('exit');
+              } else {
+                content.classList.remove('visible');
+                content.classList.remove('exit');
+              }
             }
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(content);
+          });
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(content);
+
+      const rect = content.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        content.classList.add('visible');
+      }
+    }
   }
+
+  initIntro();
+  document.addEventListener('astro:page-load', initIntro);
 </script>
