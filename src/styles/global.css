@@ -95,3 +95,6 @@ nav {
   background-color: rgba(10, 0, 16, 0.92) !important;
   border-bottom: 1px solid var(--border);
 }
+
+details[open] summary span:last-child { transform: rotate(180deg); }
+details summary span:last-child { transition: transform 0.2s ease; display: inline-block; }

@@ -1,26 +1,165 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 ---
-<Layout title="Midterm | Lanze">
-  <section class="min-h-screen px-4 py-28 max-w-4xl mx-auto">
-    <h1 class="font-bold text-4xl md:text-6xl mb-10 text-center">&lt;Midterm /&gt;</h1>
-    <div class="grid gap-8">
-      <div id="quizzes" class="border-2 border-white rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4">&gt; Quizzes</h2>
-        <p class="opacity-70">Coming soon.</p>
-      </div>
-      <div id="seatworks" class="border-2 border-white rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4">&gt; Seatworks</h2>
-        <p class="opacity-70">Coming soon.</p>
-      </div>
-      <div id="activities" class="border-2 border-white rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4">&gt; Activities</h2>
-        <p class="opacity-70">Coming soon.</p>
-      </div>
-      <div id="exam" class="border-2 border-white rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4">&gt; Exam</h2>
-        <p class="opacity-70">Coming soon.</p>
-      </div>
+<Layout title="Midterm | Lanze Matthew">
+  <div class="min-h-screen px-4 py-28 max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="mb-16">
+      <p class="text-2xl md:text-3xl opacity-50 font-mono mb-2">// Midterm</p>
+      <h1 class="text-4xl md:text-6xl font-bold">
+        <span class="text-[#9b7ab8]">public class</span>
+        <span class="text-[#eddcff]"> Midterm </span>
+        <span class="text-[#b76cff]">&#123;</span>
+      </h1>
     </div>
-  </section>
+
+    <!-- Quizzes -->
+    <section id="quizzes" class="mb-20">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-[#b76cff]">&gt; quizzes</h2>
+
+      <!-- Quiz 1 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button
+          class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors"
+          onclick="toggleQuiz('quiz1')"
+        >
+          <h3 class="text-xl font-bold">Midterm Quiz #1</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">15 / 30</span>
+            <svg id="quiz1-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </button>
+        <div id="quiz1" class="hidden px-6 pb-6">
+          <p class="opacity-50 text-sm">No copy of questions and answers available for this quiz.</p>
+        </div>
+      </div>
+
+      <!-- Quiz 2 -->
+      <div class="border border-[#3b0060] rounded-lg bg-[#120018] overflow-hidden">
+        <button
+          class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors"
+          onclick="toggleQuiz('quiz2')"
+        >
+          <h3 class="text-xl font-bold">Midterm Quiz #2</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">36 / 45</span>
+            <svg id="quiz2-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+        </button>
+        <div id="quiz2" class="hidden px-6 pb-6">
+          <p class="text-xs opacity-40 font-mono mb-6">Submitted Mar 26 · 26 minutes · Correct answers hidden</p>
+
+          <div class="grid gap-4">
+            {[
+              { n: 1, pts: "1/1", q: "Which of the following best describes a Java method?", answer: "A block of code that performs a specific task", correct: true },
+              { n: 2, pts: "0/1", q: "What is used to call or execute a method?", answer: "method call", correct: false },
+              { n: 3, pts: "0/1", q: "What method is used to find the length of a string?", answer: ".length", correct: false },
+              { n: 4, pts: "1/1", q: "What is the purpose of parameters in a method?", answer: "To accept input values", correct: true },
+              { n: 5, pts: "1/1", q: "If a method is declared as static, can it be called without creating an object of the class?", answer: "True", correct: true },
+              { n: 6, pts: "1/1", q: "What do you call a block of code that performs a specific task in Java?", answer: "method", correct: true },
+              { n: 7, pts: "0/1", q: "What is the output of Math.sqrt(25)?", answer: "5", correct: false },
+              { n: 8, pts: "0/1", q: "What part of a method contains the actual code to be executed?", answer: "body", correct: false },
+              { n: 9, pts: "1/1", q: "What do you call the visibility level of a method?", answer: "access modifier", correct: true },
+              { n: 10, pts: "1/1", q: "What will name.toUpperCase() do?", answer: "Convert string to uppercase", correct: true },
+              { n: 11, pts: "1/1", q: "Which part of a method specifies what value it returns?", answer: "Return type", correct: true },
+              { n: 12, pts: "0/1", q: "What Java class provides methods like max(), min(), and sqrt()?", answer: "math", correct: false },
+              { n: 13, pts: "0/1", q: "When modifying an array element using its index, does the new value replace the previous value stored at that position?", answer: "False", correct: false },
+              { n: 14, pts: "1/1", q: "What keyword is used when a method does not return a value?", answer: "void", correct: true },
+              { n: 15, pts: "1/1", q: "What does Arrays.sort() do?", answer: "Sorts array elements", correct: true },
+              { n: 16, pts: "1/1", q: "Which of the following is required to use Console class?", answer: "java.io.Consolelibrary", correct: true },
+              { n: 17, pts: "0/1", q: "What is the purpose of closing input streams?", answer: "To avoid memory leaks", correct: false },
+              { n: 18, pts: "0/1", q: "What is the wrapper class used before BufferedReader?", answer: "readLine()", correct: false },
+              { n: 19, pts: "1/1", q: "If multiple command line arguments are passed, can they be accessed using index positions like an array (e.g., args[0], args[1])?", answer: "True", correct: true },
+              { n: 20, pts: "0/1", q: "Which Scanner method reads a floating-point number?", answer: "nextFloat()", correct: false },
+              { n: 21, pts: "0/1", q: "What type of input allows dynamic configuration of a program during runtime?", answer: "command line arguments", correct: false },
+              { n: 22, pts: "0/1", q: "What structure receives command line inputs in the main method?", answer: "array", correct: false },
+              { n: 23, pts: "1/1", q: "Which command runs a compiled Java program?", answer: "java filename", correct: true },
+              { n: 24, pts: "1/1", q: "If a program uses the Console class to input a password, will the characters typed by the user be visible on the screen?", answer: "False", correct: true },
+              { n: 25, pts: "1/1", q: "Which class is considered more primitive for input handling?", answer: "BufferedReader", correct: true },
+              { n: 26, pts: "1/1", q: "Which Scanner method reads an integer value?", answer: "nextInt()", correct: true },
+              { n: 27, pts: "1/1", q: "What is the term for inputs passed after the program name during execution?", answer: "command line arguments", correct: true },
+              { n: 28, pts: "1/1", q: "Which Java class is most widely used for taking user input?", answer: "Scanner", correct: true },
+              { n: 29, pts: "1/1", q: "What class is used to read buffered text input efficiently?", answer: "BufferedReader", correct: true },
+              { n: 30, pts: "1/1", q: "What is the process of converting Java code into bytecode called?", answer: "compilation", correct: true },
+              { n: 31, pts: "0/1", q: "Statement used when condition is false.", answer: "else", correct: false },
+              { n: 32, pts: "0/1", q: "What data type is NOT allowed in switch?", answer: "boolean", correct: false },
+              { n: 33, pts: "1/1", q: "The if statement only runs when condition is true.", answer: "True", correct: true },
+              { n: 34, pts: "1/1", q: "What happens if break is not used in switch?", answer: "Executes next cases", correct: true },
+              { n: 35, pts: "1/1", q: "What will be output? for(int i=1;i<=3;i++){ System.out.print(i); }", answer: "123", correct: true },
+              { n: 36, pts: "0/1", q: "Which loop executes at least once?", answer: "do-while", correct: false },
+              { n: 37, pts: "0/1", q: "What does continue do?", answer: "Repeats code", correct: false },
+              { n: 38, pts: "1/1", q: "Which loop is best when iterations are unknown?", answer: "while", correct: true },
+              { n: 39, pts: "0/1", q: "What does break do?", answer: "Exit loop", correct: false },
+              { n: 40, pts: "0/1", q: "A chain of conditions forming a decision tree.", answer: "if-else", correct: false },
+              { n: 41, pts: "1/1", q: "Which of the following is NOT a type of control structure?", answer: "Compilation", correct: true },
+              { n: 42, pts: "1/1", q: "else block runs when condition is true.", answer: "False", correct: true },
+              { n: 43, pts: "1/1", q: "What is required for a loop to continue?", answer: "True condition", correct: true },
+              { n: 44, pts: "1/1", q: "Which statement is optional in switch?", answer: "D. Both B and C", correct: true },
+              { n: 45, pts: "1/1", q: "Which loop is best when iterations are known?", answer: "for", correct: true },
+            ].map((item) => (
+              <div class={`p-4 rounded border ${item.correct ? 'border-[#3b0060]' : 'border-[#5c0030]'} bg-[#0a0010]`}>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-mono opacity-50">Question {item.n}</span>
+                  <span class={`text-xs font-mono px-2 py-0.5 rounded ${item.correct ? 'text-[#b76cff] border border-[#3b0060]' : 'text-[#ff6b8a] border border-[#5c0030]'}`}>
+                    {item.pts} pts
+                  </span>
+                </div>
+                <p class="text-sm opacity-90 mb-3">{item.q}</p>
+                <p class="text-sm font-mono">
+                  <span class="opacity-40">answer: </span>
+                  <span class={item.correct ? 'text-[#b76cff]' : 'text-[#ff6b8a]'}>{item.answer}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seatworks -->
+    <section id="seatworks" class="mb-20">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-[#b76cff]">&gt; seatworks</h2>
+      <div class="border border-[#3b0060] rounded-lg p-6 bg-[#120018] opacity-50">
+        <p class="text-sm font-mono">// coming soon</p>
+      </div>
+    </section>
+
+    <!-- Activities -->
+    <section id="activities" class="mb-20">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-[#b76cff]">&gt; activities</h2>
+      <div class="border border-[#3b0060] rounded-lg p-6 bg-[#120018] opacity-50">
+        <p class="text-sm font-mono">// coming soon</p>
+      </div>
+    </section>
+
+    <!-- Exam -->
+    <section id="exam" class="mb-20">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-[#b76cff]">&gt; exam</h2>
+      <div class="border border-[#3b0060] rounded-lg p-6 bg-[#120018] opacity-50">
+        <p class="text-sm font-mono">// coming soon</p>
+      </div>
+    </section>
+
+    <!-- Closing brace -->
+    <p class="text-[#b76cff] text-2xl font-bold">&#125;</p>
+
+  </div>
 </Layout>
+
+<script>
+  function toggleQuiz(id: string) {
+    const content = document.getElementById(id);
+    const arrow = document.getElementById(id + '-arrow');
+    if (!content || !arrow) return;
+    content.classList.toggle('hidden');
+    arrow.classList.toggle('rotate-180');
+  }
+
+  // expose to window for onclick
+  (window as any).toggleQuiz = toggleQuiz;
+</script>
