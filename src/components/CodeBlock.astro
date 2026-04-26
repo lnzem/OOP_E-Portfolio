@@ -1,0 +1,42 @@
+---
+interface Props {
+  code: string;
+}
+const { code } = Astro.props;
+
+function highlight(code: string): string {
+  const keywords = ['import', 'public', 'class', 'static', 'void', 'new', 'int', 'boolean', 'String', 'while', 'if', 'else', 'switch', 'case', 'break', 'default', 'return', 'true', 'false'];
+  const lines = code.split('\n');
+  return lines.map(line => {
+    // escape HTML first
+    let l = line.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    // use placeholders to avoid conflicts between passes
+    l = l.replace(/"([^"]*)"/g, '\x00STR\x00$1\x00ENDSTR\x00');
+    l = l.replace(/(\/\/.*$)/, '\x00CMT\x00$1\x00ENDCMT\x00');
+    keywords.forEach(kw => {
+      l = l.replace(new RegExp(`\\b(${kw})\\b`, 'g'), '\x00KW\x00$1\x00ENDKW\x00');
+    });
+    l = l.replace(/\b(\d+)\b/g, '\x00NUM\x00$1\x00ENDNUM\x00');
+    l = l.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g, '\x00FN\x00$1\x00ENDFN\x00(');
+    // replace placeholders with spans
+    l = l.replace(/\x00STR\x00(.*?)\x00ENDSTR\x00/g, '<span class="c-str">"$1"</span>');
+    l = l.replace(/\x00CMT\x00(.*?)\x00ENDCMT\x00/g, '<span class="c-comment">$1</span>');
+    l = l.replace(/\x00KW\x00(.*?)\x00ENDKW\x00/g, '<span class="c-kw">$1</span>');
+    l = l.replace(/\x00NUM\x00(.*?)\x00ENDNUM\x00/g, '<span class="c-num">$1</span>');
+    l = l.replace(/\x00FN\x00(.*?)\x00ENDFN\x00/g, '<span class="c-fn">$1</span>');
+    return l;
+  }).join('\n');
+}
+
+const highlighted = highlight(code);
+---
+
+<pre class="text-xs p-4 overflow-x-auto leading-relaxed bg-[#060010] rounded border border-[#3b0060]"><code set:html={highlighted} /></pre>
+
+<style>
+  :global(.c-kw)      { color: #c084fc; }
+  :global(.c-str)     { color: #86efac; }
+  :global(.c-comment) { color: #6b7280; font-style: italic; }
+  :global(.c-num)     { color: #fb923c; }
+  :global(.c-fn)      { color: #67e8f9; }
+</style>

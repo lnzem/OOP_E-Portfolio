@@ -1,10 +1,338 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+
+const sw2code = `import java.util.Scanner;
+
+public class ATMTransactionCounterJallorina {
+    public static void main(String[] args) {
+        int balance = 8000;
+        int transactionsCounter = 0;
+        boolean active = true;
+        Scanner input = new Scanner(System.in);
+
+        while (active) {
+            System.out.println("===== ATM MENU =====");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Exit");
+            System.out.print("Enter Choice: ");
+            int option = input.nextInt();
+
+            switch (option) {
+                case 1:
+                    transactionsCounter++;
+                    System.out.println("Balance: P" + balance);
+                    break;
+                case 2:
+                    System.out.print("Deposit amount: P");
+                    int addbal = input.nextInt();
+                    balance += addbal;
+                    System.out.println("Deposited: P" + addbal);
+                    System.out.println("New Balance: P" + balance);
+                    break;
+                case 3:
+                    System.out.print("Withdraw amount: P");
+                    int withdraw = input.nextInt();
+                    transactionsCounter++;
+                    if (withdraw > 2000) {
+                        System.out.println("Exceeds maximum withdrawal of P2000!");
+                    } else if (withdraw > balance) {
+                        System.out.println("Insufficient balance!");
+                    } else {
+                        balance -= withdraw;
+                        System.out.println("Withdrawn: P" + withdraw);
+                        System.out.println("New Balance: P" + balance);
+                    }
+                    break;
+                case 4:
+                    System.out.println("Exiting.... Goodbye!");
+                    active = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+
+        System.out.println("Transaction Count: " + transactionsCounter);
+        System.out.println("Final Balance: P" + balance);
+    }
+}`;
+
+const sw3code = `import java.util.Scanner;
+
+public class StudentAgeAnalyzerJallorina {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=== Student Age Analyzer ===");
+
+        System.out.print("Enter Student Name: ");
+        String studentName = scanner.nextLine();
+        System.out.print("Enter Student Age: ");
+        int studentAge = scanner.nextInt();
+
+        String category = ageCategorizer(studentAge);
+
+        System.out.println("Name: " + studentName);
+        System.out.println("Age: " + studentAge);
+        System.out.println("Category: " + category);
+    }
+
+    public static String ageCategorizer(int studentAge) {
+        if (studentAge >= 0 && studentAge <= 12) {
+            return "Child";
+        } else if (studentAge >= 13 && studentAge <= 19) {
+            return "Teenager";
+        } else if (studentAge >= 20 && studentAge <= 59) {
+            return "Adult";
+        } else if (studentAge >= 60) {
+            return "Senior Citizen";
+        } else {
+            return "Invalid age!";
+        }
+    }
+}`;
+
+const act1code = `public class Variables {
+    String name;
+    int grade;
+
+    public void display(String n, int g) {
+        System.out.println(n + " " + g);
+    }
+
+    public static void main(String[] args) {
+        Variables s1 = new Variables();
+        s1.name = "John";
+        s1.grade = 85;
+
+        Variables s2 = new Variables();
+        s2.name = "Maria";
+        s2.grade = 90;
+
+        Variables s3 = s2;
+        s1.grade = 95;
+        s3.name = "Ana";
+
+        System.out.println("TestStudent");
+        System.out.println(s1.name + " " + s1.grade);
+        System.out.println(s2.name + " " + s2.grade);
+        System.out.println(s3.name + " " + s3.grade);
+    }
+}`;
+
+const act2code = `// Part I - Bitwise Operators
+public class BitwiseOperators {
+    public static void main(String[] args) {
+        int a = 5;   // binary: 0101
+        int b = 10;  // binary: 01010
+        int c = 13;  // binary: 01101
+
+        System.out.println((a & c) > 0); // Bitwise AND (&): true
+        System.out.println(b ^ 0);       // Bitwise XOR (^): 10
+        System.out.println((~a) == a);   // Bitwise NOT (~): false
+        a ^= b;
+        System.out.println(a);           // XOR Assignment (^=): 15
+    }
+}
+
+// Part I - Ternary Operator
+public class TernaryOperators {
+    public static void main(String[] args) {
+        int a = 25;
+        int b = 30;
+        System.out.println(a < b ? true : false);
+        System.out.println(a > b ? true : false);
+        System.out.println(a < b ? a : b);
+        System.out.println(a > b ? a : b);
+    }
+}
+
+// Part I - Assignment Operators
+public class AssignmentOperators {
+    public static void main(String[] args) {
+        int b = 24;
+        int x;
+        x = 96;  x += b; System.out.println("Addition: " + x);
+        x = 94;  x -= b; System.out.println("Subtraction: " + x);
+        x = 6;   x *= b; System.out.println("Multiplication: " + x);
+        x = 384; x /= b; System.out.println("Division: " + x);
+    }
+}
+
+// Part II - Mixed Operators
+public class Operations {
+    public static void main(String[] args) {
+        int p = 7, q = 3, r = 15, s = 8, t = 20;
+        System.out.println(p++ + ++p); // Unary (++): 16
+        q *= r; System.out.println(q); // Assignment (*=): 45
+        System.out.println(q > t);     // Relational (>): true
+        System.out.println(!(s == q)); // Logical (!): true
+        System.out.println(r ^ s);     // Bitwise (^): 7
+        System.out.println(--t + t++); // Unary (--): 38
+    }
+}`;
+
+const act3code = `import java.util.Scanner;
+
+public class SimpleWalletJallorina {
+    public static void main(String[] args) {
+        int balance = 3000;
+        int transactions = 0;
+        System.out.println("===== Simple Wallet System =====");
+        Scanner input = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("===== WALLET MENU =====");
+            System.out.println("1. View Balance");
+            System.out.println("2. Add Money");
+            System.out.println("3. Spend Money");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+            int option = input.nextInt();
+
+            switch (option) {
+                case 1:
+                    transactions++;
+                    System.out.println("Balance: P" + balance);
+                    break;
+                case 2:
+                    System.out.print("Enter amount of Money to add: P");
+                    int addmoney = input.nextInt();
+                    if (addmoney <= 0) {
+                        System.out.println("Invalid Amount.");
+                    } else {
+                        balance += addmoney;
+                        transactions++;
+                        System.out.println("New Balance: P" + balance);
+                    }
+                    break;
+                case 3:
+                    System.out.print("Enter Amount you want to Spend: P");
+                    int spend = input.nextInt();
+                    if (spend <= 0) {
+                        System.out.println("Invalid Amount!");
+                    } else if (spend > 1000) {
+                        System.out.println("Exceeds the maximum spend limit of 1000!");
+                    } else if (spend > balance) {
+                        System.out.println("Insufficient Balance!");
+                    } else {
+                        balance -= spend;
+                        System.out.println("New Balance: P" + balance);
+                        transactions++;
+                    }
+                    break;
+                case 4:
+                    System.out.println("Total Transactions: " + transactions);
+                    System.out.println("Final Balance: P" + balance);
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}`;
+
+const act4code = `public class GradeEvaluationJallorina {
+    public static void main(String[] args) {
+        double prelim = 85;
+        double midterm = 78;
+        double finals = 90;
+        String remark;
+
+        double average = (prelim + midterm + finals) / 3;
+
+        if (average >= 90 && average <= 100) {
+            remark = "Excellent";
+        } else if (average >= 80 && average <= 89) {
+            remark = "Good";
+        } else if (average >= 75 && average <= 79) {
+            remark = "Fair";
+        } else {
+            remark = "Failed";
+        }
+
+        System.out.println("Prelim Grade: " + prelim);
+        System.out.println("Midterm Grade: " + midterm);
+        System.out.println("Finals Grade: " + finals);
+        System.out.printf("Average: %.2f%n", average);
+        System.out.println("Remark: " + remark);
+    }
+}`;
+
+const act5code = `import java.util.Scanner;
+
+public class ExpenseTrackerJallorina {
+    static void Titledisplay() {
+        System.out.println("===== Personal Expense Tracker =====");
+    }
+
+    static double Calculatetotal(double food, double transportation, double other, double entertainment) {
+        return food + transportation + other + entertainment;
+    }
+
+    static String Budgetcheck(double total, double budget) {
+        if (total > budget) {
+            double over = total - budget;
+            return String.format("OVER BUDGET BY P %.2f!", over);
+        } else if (total == budget) {
+            return "You spent all your budget. Nothing left!";
+        } else {
+            return "You are within budget. Nice!";
+        }
+    }
+
+    static void Summarydisplay(String name, double food, double transportation,
+            double other, double entertainment, double total, double budget, String Budgetstatus) {
+        double remaining = budget - total;
+        System.out.println("===== Expense Summary =====");
+        System.out.printf("Name           : %s%n", name);
+        System.out.println("---------------");
+        System.out.printf("Food           : P %.2f%n", food);
+        System.out.printf("Transportation : P %.2f%n", transportation);
+        System.out.printf("Entertainment  : P %.2f%n", entertainment);
+        System.out.printf("Other          : P %.2f%n", other);
+        System.out.println("----------");
+        System.out.printf("Total Expenses : P %.2f%n", total);
+        System.out.printf("Budget         : P %.2f%n", budget);
+        System.out.println("----------");
+        System.out.println("Status         : " + Budgetstatus);
+        System.out.printf("Remaining      : P %.2f%n", remaining);
+        System.out.println("====================");
+        if (total > budget) {
+            System.out.printf("%nHey %s, try to cut back on the spending! You might go homeless.%n", name);
+        } else if (remaining >= budget * 0.5) {
+            System.out.printf("%nWow %s, you're an amazing saver! Great work!%n", name);
+        } else {
+            System.out.printf("%nGood work, %s! Keep tracking!%n", name);
+        }
+        System.out.println("====================");
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Titledisplay();
+        System.out.print("\\n Enter your name: ");
+        String name = scan.nextLine();
+        System.out.print(" Enter your budget (PESOS): ");
+        double budget = scan.nextDouble();
+        System.out.println("\\n Enter your expenses:");
+        System.out.print(" Food           : P "); double food = scan.nextDouble();
+        System.out.print(" Transportation : P "); double transportation = scan.nextDouble();
+        System.out.print(" Entertainment  : P "); double entertainment = scan.nextDouble();
+        System.out.print(" Other          : P "); double other = scan.nextDouble();
+        double total = Calculatetotal(food, transportation, other, entertainment);
+        String Budgetstatus = Budgetcheck(total, budget);
+        Summarydisplay(name, food, transportation, other, entertainment, total, budget, Budgetstatus);
+        scan.close();
+    }
+}`;
 ---
 <Layout title="Midterm | Lanze Matthew">
   <div class="min-h-screen px-4 py-28 max-w-5xl mx-auto">
 
-    <!-- Header -->
     <div class="mb-16">
       <p class="text-2xl md:text-3xl opacity-50 font-mono mb-2">// Midterm</p>
       <h1 class="text-4xl md:text-6xl font-bold">
@@ -20,41 +348,39 @@ import Layout from "@/layouts/Layout.astro";
 
       <!-- Quiz 1 -->
       <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
-        <button
-          class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors"
-          onclick="toggleQuiz('quiz1')"
-        >
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('quiz1')">
           <h3 class="text-xl font-bold">Midterm Quiz #1</h3>
           <div class="flex items-center gap-3">
             <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">15 / 30</span>
-            <svg id="quiz1-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
+            <svg id="quiz1-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
         </button>
         <div id="quiz1" class="hidden px-6 pb-6">
-          <p class="opacity-50 text-sm">No copy of questions and answers available for this quiz.</p>
+          <p class="opacity-50 text-sm mb-6">No copy of questions and answers available for this quiz.</p>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('quiz1-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection</span>
+              <svg id="quiz1-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="quiz1-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">The first quiz served as a brief introduction to what OOP and Java are all about. I learned that Java is widely recognized and well-regarded, particularly as an object-oriented language. It covered the basic structure of Java and the history of the language, which gave me a solid foundation to build on throughout the course.</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Quiz 2 -->
       <div class="border border-[#3b0060] rounded-lg bg-[#120018] overflow-hidden">
-        <button
-          class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors"
-          onclick="toggleQuiz('quiz2')"
-        >
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('quiz2')">
           <h3 class="text-xl font-bold">Midterm Quiz #2</h3>
           <div class="flex items-center gap-3">
             <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">36 / 45</span>
-            <svg id="quiz2-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
+            <svg id="quiz2-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
         </button>
         <div id="quiz2" class="hidden px-6 pb-6">
-          <p class="text-xs opacity-40 font-mono mb-6">Submitted Mar 26 · 26 minutes · Correct answers hidden</p>
-
-          <div class="grid gap-4">
+          <p class="text-xs opacity-40 font-mono mb-6">Submitted Mar 26 &middot; 26 minutes &middot; Correct answers hidden</p>
+          <div class="grid gap-4 mb-6">
             {[
               { n: 1, pts: "1/1", q: "Which of the following best describes a Java method?", answer: "A block of code that performs a specific task", correct: true },
               { n: 2, pts: "0/1", q: "What is used to call or execute a method?", answer: "method call", correct: false },
@@ -71,7 +397,7 @@ import Layout from "@/layouts/Layout.astro";
               { n: 13, pts: "0/1", q: "When modifying an array element using its index, does the new value replace the previous value stored at that position?", answer: "False", correct: false },
               { n: 14, pts: "1/1", q: "What keyword is used when a method does not return a value?", answer: "void", correct: true },
               { n: 15, pts: "1/1", q: "What does Arrays.sort() do?", answer: "Sorts array elements", correct: true },
-              { n: 16, pts: "1/1", q: "Which of the following is required to use Console class?", answer: "java.io.Consolelibrary", correct: true },
+              { n: 16, pts: "1/1", q: "Which of the following is required to use Console class?", answer: "java.io.Console library", correct: true },
               { n: 17, pts: "0/1", q: "What is the purpose of closing input streams?", answer: "To avoid memory leaks", correct: false },
               { n: 18, pts: "0/1", q: "What is the wrapper class used before BufferedReader?", answer: "readLine()", correct: false },
               { n: 19, pts: "1/1", q: "If multiple command line arguments are passed, can they be accessed using index positions like an array (e.g., args[0], args[1])?", answer: "True", correct: true },
@@ -105,17 +431,21 @@ import Layout from "@/layouts/Layout.astro";
               <div class={`p-4 rounded border ${item.correct ? 'border-[#3b0060]' : 'border-[#5c0030]'} bg-[#0a0010]`}>
                 <div class="flex justify-between items-center mb-2">
                   <span class="text-xs font-mono opacity-50">Question {item.n}</span>
-                  <span class={`text-xs font-mono px-2 py-0.5 rounded ${item.correct ? 'text-[#b76cff] border border-[#3b0060]' : 'text-[#ff6b8a] border border-[#5c0030]'}`}>
-                    {item.pts} pts
-                  </span>
+                  <span class={`text-xs font-mono px-2 py-0.5 rounded ${item.correct ? 'text-[#b76cff] border border-[#3b0060]' : 'text-[#ff6b8a] border border-[#5c0030]'}`}>{item.pts} pts</span>
                 </div>
                 <p class="text-sm opacity-90 mb-3">{item.q}</p>
-                <p class="text-sm font-mono">
-                  <span class="opacity-40">answer: </span>
-                  <span class={item.correct ? 'text-[#b76cff]' : 'text-[#ff6b8a]'}>{item.answer}</span>
-                </p>
+                <p class="text-sm font-mono"><span class="opacity-40">answer: </span><span class={item.correct ? 'text-[#b76cff]' : 'text-[#ff6b8a]'}>{item.answer}</span></p>
               </div>
             ))}
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('quiz2-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection</span>
+              <svg id="quiz2-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="quiz2-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">This quiz tackled the mid-level features of Java. I applied what I had learned about control flow statements, classes, methods, and how to accept user input. Even with the time pressure that comes with timed quizzes, I was able to answer most questions confidently and felt a noticeable improvement in my understanding of Java compared to the first quiz.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -124,42 +454,441 @@ import Layout from "@/layouts/Layout.astro";
     <!-- Seatworks -->
     <section id="seatworks" class="mb-20">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-[#b76cff]">&gt; seatworks</h2>
-      <div class="border border-[#3b0060] rounded-lg p-6 bg-[#120018] opacity-50">
-        <p class="text-sm font-mono">// coming soon</p>
+
+      <!-- SW1 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw1')">
+          <h3 class="text-xl font-bold">Midterm Seatwork #1</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">30 / 30</span>
+            <svg id="sw1-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="sw1" class="hidden px-6 pb-6">
+          <p class="opacity-50 text-sm mb-6">No copy of the original seatwork available.</p>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw1-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="sw1-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw1-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">This seatwork introduced logical and bitwise operators, as well as postfix and prefix increment and decrement operations. I had some difficulty with the increment and decrement portions since the distinction between prefix and postfix can be tricky to trace on paper. Through this activity, I learned about short-circuit evaluation and how to properly trace code step by step, which is a skill that carries over to debugging and understanding more complex programs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SW2 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw2')">
+          <h3 class="text-xl font-bold">Midterm Seatwork #2 &mdash; Basic ATM System</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">25 / 30</span>
+            <svg id="sw2-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="sw2" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw2-code')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// typed code</span>
+              <svg id="sw2-code-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw2-code" class="hidden p-2">
+              <CodeBlock code={sw2code} />
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw2-original')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// original handwritten copy</span>
+              <svg id="sw2-original-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw2-original" class="hidden p-2">
+              <p class="text-xs opacity-40 font-mono px-2 pb-2">BSIT 2-1 &middot; Lanze Matthew C. Jallorina &middot; Mar 19, 2026</p>
+              <iframe src="/OOP_E-PORTFOLIO/sw2.pdf" class="w-full rounded border border-[#3b0060]" style="height:600px;" title="SW2 Original"></iframe>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw2-explanation')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// explanation</span>
+              <svg id="sw2-explanation-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw2-explanation" class="hidden px-4 pb-4 grid gap-3">
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">while(active)</span> &mdash; The while loop keeps the ATM menu running continuously until the user selects option 4, which sets <span class="text-[#b76cff] font-mono">active = false</span> and stops the loop.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">switch(option)</span> &mdash; The switch statement acts as the decision maker, directing program flow based on the selected option. The <span class="text-[#b76cff] font-mono">break</span> statement in each case prevents fall-through execution.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">if-else (withdrawal validation)</span> &mdash; Checks if the withdrawal exceeds P2000, then if funds are sufficient. If both pass, the withdrawal proceeds; otherwise an error message is shown.</p>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw2-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="sw2-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw2-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">This seatwork shows how a <span class="text-[#b76cff] font-mono">switch</span> statement can cleanly handle menu-driven programs, and how program state like balance and transaction count can be managed efficiently using simple variables throughout the loop's lifecycle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SW3 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw3')">
+          <h3 class="text-xl font-bold">Midterm Seatwork #3 &mdash; Student Age Analyzer</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">30 / 30</span>
+            <svg id="sw3-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="sw3" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw3-code')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// typed code</span>
+              <svg id="sw3-code-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw3-code" class="hidden p-2">
+              <CodeBlock code={sw3code} />
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw3-original')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// original handwritten copy</span>
+              <svg id="sw3-original-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw3-original" class="hidden p-2">
+              <p class="text-xs opacity-40 font-mono px-2 pb-2">BSIT 2-1 &middot; Lanze Matthew C. Jallorina &middot; Apr 16, 2026</p>
+              <iframe src="/OOP_E-PORTFOLIO/sw3.pdf" class="w-full rounded border border-[#3b0060]" style="height:600px;" title="SW3 Original"></iframe>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw3-explanation')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// explanation</span>
+              <svg id="sw3-explanation-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw3-explanation" class="hidden px-4 pb-4 grid gap-3">
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">ageCategorizer(int studentAge)</span> &mdash; A separate static method that takes the student's age as a parameter and returns a String category. Isolating this logic keeps the <span class="text-[#b76cff] font-mono">main</span> method clean and readable.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">if-else chain</span> &mdash; Uses range checks with <span class="text-[#b76cff] font-mono">&amp;&amp;</span> to categorize the age into Child (0-12), Teenager (13-19), Adult (20-59), or Senior Citizen (60+).</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Scanner input</span> &mdash; Uses <span class="text-[#b76cff] font-mono">scanner.nextLine()</span> for the name and <span class="text-[#b76cff] font-mono">scanner.nextInt()</span> for the age, demonstrating how different Scanner methods handle different data types.</p>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('sw3-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="sw3-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="sw3-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">This seatwork showed me how methods can be used to organize code and how control flow statements handle decision-making logic. It's a practical example of how OOP principles, particularly separating concerns through methods, can make code more structured, readable, and easier to maintain.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Activities -->
     <section id="activities" class="mb-20">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-[#b76cff]">&gt; activities</h2>
-      <div class="border border-[#3b0060] rounded-lg p-6 bg-[#120018] opacity-50">
-        <p class="text-sm font-mono">// coming soon</p>
+
+      <!-- ACT 1 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act1')">
+          <h3 class="text-xl font-bold">Midterm Activity #1 &mdash; Variables</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">28 / 30</span>
+            <svg id="act1-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="act1" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act1-code')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// typed code</span>
+              <svg id="act1-code-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act1-code" class="hidden p-2">
+              <CodeBlock code={act1code} />
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act1-original')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// original handwritten copy</span>
+              <svg id="act1-original-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act1-original" class="hidden p-2">
+              <p class="text-xs opacity-40 font-mono px-2 pb-2">BSIT 2-1 &middot; Lanze Matthew C. Jallorina &middot; Mar 3, 2026</p>
+              <iframe src="/OOP_E-PORTFOLIO/act1.pdf" class="w-full rounded border border-[#3b0060]" style="height:600px;" title="ACT1 Original"></iframe>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act1-explanation')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// explanation</span>
+              <svg id="act1-explanation-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act1-explanation" class="hidden px-4 pb-4 grid gap-3">
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">class Variables</span> — Defines a class with two instance fields: <span class="text-[#b76cff] font-mono">name</span> (String) and <span class="text-[#b76cff] font-mono">grade</span> (int). These are stored on the heap as part of each object created from this class.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">display(String n, int g)</span> — An instance method that takes two parameters and prints them. The parameter names <span class="text-[#b76cff] font-mono">n</span> and <span class="text-[#b76cff] font-mono">g</span> are local to the method and live on the stack, separate from the object's own fields.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Variables s3 = s2</span> — This does not create a copy of the object. Both <span class="text-[#b76cff] font-mono">s3</span> and <span class="text-[#b76cff] font-mono">s2</span> now point to the same object in memory, so when <span class="text-[#b76cff] font-mono">s3.name</span> is changed to "Ana", the change is also visible through <span class="text-[#b76cff] font-mono">s2</span>.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">s1.grade = 95</span> — Modifying <span class="text-[#b76cff] font-mono">s1</span>'s grade after the objects are created shows that each object manages its own field values independently, unlike reference assignments between objects.</p>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act1-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="act1-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act1-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">This activity deepened my understanding of how Java manages variables in memory. Identifying the difference between instance variables, parameters, and reference variables and where each is stored on the heap vs. the stack was a key takeaway. The most eye-opening part was seeing how assigning one reference variable to another like <span class="text-[#b76cff] font-mono">s3 = s2</span> doesn't copy the object but shares the same memory address, meaning changes through either reference affect the same object.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACT 2 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act2')">
+          <h3 class="text-xl font-bold">Midterm Activity #2 &mdash; Operators</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">30 / 30</span>
+            <svg id="act2-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="act2" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act2-code')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// typed code</span>
+              <svg id="act2-code-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act2-code" class="hidden p-2">
+              <CodeBlock code={act2code} />
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act2-original')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// original copy</span>
+              <svg id="act2-original-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act2-original" class="hidden p-2">
+              <p class="text-xs opacity-40 font-mono px-2 pb-2">BSIT 2-1 &middot; Lanze Matthew C. Jallorina &middot; Mar 3, 2026</p>
+              <iframe src="/OOP_E-PORTFOLIO/act2.pdf" class="w-full rounded border border-[#3b0060]" style="height:600px;" title="ACT2 Original"></iframe>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act2-explanation')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// explanation</span>
+              <svg id="act2-explanation-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act2-explanation" class="hidden px-4 pb-4 grid gap-3">
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Bitwise operators (&amp;, ^, ~, ^=)</span> — These operate directly on the binary representation of integers. For example, <span class="text-[#b76cff] font-mono">a &amp; c</span> compares each bit of 5 (0101) and 13 (1101), yielding 5 (0101). The NOT operator <span class="text-[#b76cff] font-mono">~a</span> flips all bits, making it a large negative number and not equal to <span class="text-[#b76cff] font-mono">a</span>.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Ternary operator (condition ? a : b)</span> — A shorthand for if-else that evaluates a condition and returns one of two values. Used here to compare two integers and return either <span class="text-[#b76cff] font-mono">true/false</span> or the smaller/larger value.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Assignment operators (+=, -=, *=, /=)</span> — Shorthand operators that perform an arithmetic operation and assign the result back to the variable in one step. For example, <span class="text-[#b76cff] font-mono">x += b</span> is equivalent to <span class="text-[#b76cff] font-mono">x = x + b</span>.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Prefix vs. postfix (p++ + ++p)</span> — Postfix <span class="text-[#b76cff] font-mono">p++</span> uses the current value first, then increments. Prefix <span class="text-[#b76cff] font-mono">++p</span> increments first, then uses the new value. In <span class="text-[#b76cff] font-mono">p++ + ++p</span> with p=7, it evaluates as 7 + 9 = 16 since p becomes 8 before the prefix increment fires.</p>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act2-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="act2-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act2-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">This activity gave me hands-on practice with Java's operator types, covering bitwise, ternary, assignment, relational, logical, and unary. The most challenging part was mentally tracing prefix vs. postfix increments in expressions like <span class="text-[#b76cff] font-mono">p++ + ++p</span>, where evaluation order really matters. Understanding how bitwise XOR (<span class="text-[#b76cff] font-mono">^</span>) works at the binary level also made me appreciate why it's worth understanding low-level number representations in Java.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACT 3 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act3')">
+          <h3 class="text-xl font-bold">Midterm Activity #3 &mdash; Simple Wallet System</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">30 / 30</span>
+            <svg id="act3-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="act3" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act3-code')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// typed code</span>
+              <svg id="act3-code-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act3-code" class="hidden p-2">
+              <CodeBlock code={act3code} />
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act3-original')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// original copy</span>
+              <svg id="act3-original-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act3-original" class="hidden p-2">
+              <p class="text-xs opacity-40 font-mono px-2 pb-2">BSIT 2-1 &middot; Lanze Matthew C. Jallorina &middot; Mar 26, 2026</p>
+              <iframe src="/OOP_E-PORTFOLIO/act3.pdf" class="w-full rounded border border-[#3b0060]" style="height:600px;" title="ACT3 Original"></iframe>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act3-explanation')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// explanation</span>
+              <svg id="act3-explanation-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act3-explanation" class="hidden px-4 pb-4 grid gap-3">
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">while(true)</span> — The loop runs indefinitely until <span class="text-[#b76cff] font-mono">System.exit(0)</span> is called from case 4. This pattern is common for menu-driven programs where there's no clean boolean condition to check upfront.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">switch(option)</span> — Routes the user to the appropriate action based on their menu selection. Each case handles its own validation before modifying the balance or transaction count.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Spend validation chain (case 3)</span> — The conditions are ordered intentionally: first check if the amount is zero or negative, then if it exceeds the P1000 limit, then if the balance is sufficient. Checking in this order ensures the most specific errors are caught before the general ones.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">transactions counter</span> — Only incremented on successful view, add, and spend operations, keeping an accurate count of meaningful interactions rather than counting every menu visit.</p>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act3-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="act3-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act3-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">Building the Simple Wallet System reinforced how loops, switch statements, and conditionals can be combined to create a practical, menu-driven program. The spend limit validation taught me to layer conditions in the right order to prevent logical errors, checking for invalid input first, then exceeding limits, then insufficient funds. Using <span class="text-[#b76cff] font-mono">System.exit(0)</span> as a clean program termination inside a <span class="text-[#b76cff] font-mono">while(true)</span> loop was also a pattern I hadn't used before and it stuck with me.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACT 4 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act4')">
+          <h3 class="text-xl font-bold">Midterm Activity #4 &mdash; Grade Evaluation System</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">30 / 30</span>
+            <svg id="act4-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="act4" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act4-code')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// typed code</span>
+              <svg id="act4-code-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act4-code" class="hidden p-2">
+              <CodeBlock code={act4code} />
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act4-original')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// original copy</span>
+              <svg id="act4-original-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act4-original" class="hidden p-2">
+              <p class="text-xs opacity-40 font-mono px-2 pb-2">BSIT 2-1 &middot; Lanze Matthew C. Jallorina &middot; Mar 26, 2026</p>
+              <iframe src="/OOP_E-PORTFOLIO/act4.pdf" class="w-full rounded border border-[#3b0060]" style="height:600px;" title="ACT4 Original"></iframe>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act4-explanation')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// explanation</span>
+              <svg id="act4-explanation-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act4-explanation" class="hidden px-4 pb-4 grid gap-3">
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">double average = (prelim + midterm + finals) / 3</span> — Computes the average of three grades stored as <span class="text-[#b76cff] font-mono">double</span> values. Using <span class="text-[#b76cff] font-mono">double</span> instead of <span class="text-[#b76cff] font-mono">int</span> ensures decimal precision is preserved in the result.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">if-else chain (grade ranges)</span> — Each condition checks whether the average falls within a specific range and assigns the corresponding remark string. The order matters since Java evaluates conditions top-down and stops at the first match.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">System.out.printf("Average: %.2f%n", average)</span> — Uses <span class="text-[#b76cff] font-mono">printf</span> with the <span class="text-[#b76cff] font-mono">%.2f</span> format specifier to display the average rounded to exactly two decimal places, giving the output a clean, professional look.</p>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act4-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="act4-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act4-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">The Grade Evaluation System was a clean, straightforward exercise in using if-else chains to map numeric ranges to descriptive outcomes. It reinforced how <span class="text-[#b76cff] font-mono">double</span> arithmetic and <span class="text-[#b76cff] font-mono">printf</span> formatting work together for precise output. The simplicity of the program also showed me how readable code can be when the logic stays focused and well-structured.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACT 5 -->
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act5')">
+          <h3 class="text-xl font-bold">Midterm Activity #5 &mdash; Personal Expense Tracker</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">30 / 30</span>
+            <svg id="act5-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="act5" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act5-code')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// typed code</span>
+              <svg id="act5-code-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act5-code" class="hidden p-2">
+              <CodeBlock code={act5code} />
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act5-original')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// original copy</span>
+              <svg id="act5-original-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act5-original" class="hidden p-2">
+              <p class="text-xs opacity-40 font-mono px-2 pb-2">BSIT 2-1 &middot; Lanze Matthew C. Jallorina &middot; Apr 17, 2026</p>
+              <iframe src="/OOP_E-PORTFOLIO/act5.pdf" class="w-full rounded border border-[#3b0060]" style="height:600px;" title="ACT5 Original"></iframe>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden mb-4">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act5-explanation')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// explanation</span>
+              <svg id="act5-explanation-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act5-explanation" class="hidden px-4 pb-4 grid gap-3">
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Titledisplay()</span> &mdash; A static void method with no parameters that simply prints the program banner. Separating display logic into its own method keeps the <span class="text-[#b76cff] font-mono">main</span> method cleaner and easier to read.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Calculatetotal()</span> &mdash; Takes the four expense categories as parameters and returns their sum as a <span class="text-[#b76cff] font-mono">double</span>. Encapsulating arithmetic in a dedicated method demonstrates the single-responsibility principle.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Budgetcheck()</span> &mdash; Returns a descriptive String status based on whether total expenses exceed, match, or stay under the budget. Using <span class="text-[#b76cff] font-mono">String.format()</span> allows precise formatting of the over-budget amount inline.</p>
+              <p class="text-sm opacity-80 leading-relaxed"><span class="text-[#9b7ab8] font-mono">Summarydisplay()</span> &mdash; The most complex method, accepting all computed values and printing the full formatted summary including a personalized motivational message based on the budget status and remaining balance ratio.</p>
+            </div>
+          </div>
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('act5-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="act5-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="act5-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">This was the most structured activity of the midterm period. Breaking the program into four distinct static methods, each with a clear purpose, gave me practical experience with method decomposition. I also learned how <span class="text-[#b76cff] font-mono">printf</span> and <span class="text-[#b76cff] font-mono">String.format()</span> can be used interchangeably for formatted output. The personalized feedback messages based on budget thresholds made the program feel more like a real-world tool, which made building it a lot more engaging.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Exam -->
     <section id="exam" class="mb-20">
       <h2 class="text-2xl md:text-3xl font-bold mb-8 font-mono text-[#b76cff]">&gt; exam</h2>
-      <div class="border border-[#3b0060] rounded-lg p-6 bg-[#120018] opacity-50">
-        <p class="text-sm font-mono">// coming soon</p>
+      <div class="border border-[#3b0060] rounded-lg mb-6 bg-[#120018] overflow-hidden">
+        <button class="w-full flex justify-between items-center p-6 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('exam1')">
+          <h3 class="text-xl font-bold">Midterm Exam</h3>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-mono px-3 py-1 border border-[#3b0060] text-[#9b7ab8]">score pending</span>
+            <svg id="exam1-arrow" class="w-4 h-4 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </button>
+        <div id="exam1" class="hidden px-6 pb-6">
+          <div class="border border-[#3b0060] rounded-lg overflow-hidden">
+            <button class="w-full flex justify-between items-center px-4 py-3 text-left hover:bg-[#1a0025] transition-colors" onclick="toggleSection('exam1-reflection')">
+              <span class="text-sm font-mono text-[#9b7ab8]">// reflection &amp; learnings</span>
+              <svg id="exam1-reflection-arrow" class="w-3 h-3 text-[#b76cff] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="exam1-reflection" class="hidden px-4 pb-4">
+              <p class="text-sm opacity-80 leading-relaxed">The midterm exam covered a good range of OOP concepts including pre and post increments, methods, arrays, and program tracing scenarios. It was challenging overall and pushed me to think carefully about how code executes step by step rather than just knowing the syntax. I know there are areas I can still improve on, and I'm taking this as motivation to study more thoroughly going into the finals.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Closing brace -->
     <p class="text-[#b76cff] text-2xl font-bold">&#125;</p>
 
   </div>
 </Layout>
 
 <script>
-  function toggleQuiz(id: string) {
+  function toggleSection(id: string) {
     const content = document.getElementById(id);
     const arrow = document.getElementById(id + '-arrow');
     if (!content || !arrow) return;
     content.classList.toggle('hidden');
     arrow.classList.toggle('rotate-180');
   }
-
-  // expose to window for onclick
-  (window as any).toggleQuiz = toggleQuiz;
+  (window as any).toggleSection = toggleSection;
 </script>
