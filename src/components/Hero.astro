@@ -10,11 +10,15 @@ import HeroImg from "@/hero.png";
 >
   <div class="grid place-items-center">
     <div class="text-center -mt-10">
-      <h1 class="font-bold text-4xl md:text-7xl">{`<${SITE_TITLE} />`}</h1>
+      <h1 class="font-bold text-4xl md:text-7xl">
+  <span class="text-[#b76cff]">&#123;</span>
+  <span class="text-[#eddcff]"> {SITE_TITLE} </span>
+  <span class="text-[#b76cff]">&#125;</span>
+</h1>
       <h2 class="text-2xl opacity-95">
         {QUOTE}
       </h2>
-      <p class="text-sm opacity-40 tracking-widest mt-2">{SECTION} ?? {SCHOOL}</p>
+      <p class="text-sm opacity-40 tracking-widest mt-2">{SECTION} &middot; {SCHOOL}</p>
       <p class="text-sm opacity-40 tracking-widest">{COURSE}</p>
     </div>
   </div>
@@ -25,7 +29,7 @@ import HeroImg from "@/hero.png";
       width={357}
       height={358}
       quality={100}
-      class="invert w-full max-w-[480px] sm:max-w-[560px]"
+      class="invert w-full max-w-[480px] sm:max-w-[560px] animate-float"
     />
   </div>
 </section>
@@ -39,3 +43,13 @@ import HeroImg from "@/hero.png";
     hero_bg.textContent = binaryText;
   }, 300);
 </script>
+
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+</style>
