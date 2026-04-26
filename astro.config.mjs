@@ -8,6 +8,7 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   output: "static",
   site: "https://lnzem.github.io",
+  base: "/OOP_E-PORTFOLIO",
   integrations: [mdx(), sitemap(), tailwind()],
   markdown: {
     shikiConfig: {
