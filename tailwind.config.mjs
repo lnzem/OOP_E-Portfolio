@@ -2,7 +2,12 @@
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        black: "#0a0010",
+        white: "#eddcff",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

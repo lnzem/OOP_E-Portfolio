@@ -1,11 +1,31 @@
 @font-face {
   font-family: "VCR";
-  src: url("/fonts/VCRosdNEUE.ttf") format("truetype");
+  src: url("/OOP_E-PORTFOLIO/fonts/VCRosdNEUE.ttf") format("truetype");
   font-style: normal;
   font-display: swap;
 }
+
+:root {
+  --bg-base:       #0a0010;
+  --bg-surface:    #120018;
+  --bg-elevated:   #1e0030;
+  --border:        #3b0060;
+  --text-primary:  #eddcff;
+  --text-muted:    #9b7ab8;
+  --accent:        #b76cff;
+  --accent-bright: #9333ea;
+  --glow:          rgba(147, 51, 234, 0.3);
+}
+
+html {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}
+
 body {
   font-family: "VCR", monospace !important;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
 }
 
 pre,
@@ -15,17 +35,30 @@ code {
 }
 
 ::selection {
-  background: #fff;
+  background: var(--accent);
   color: #000;
 }
 
 ::-moz-selection {
-  background: #fff;
+  background: var(--accent);
   color: #000;
 }
 
 ::-webkit-scrollbar {
   width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-bright);
 }
 
 img,
@@ -47,4 +80,18 @@ img,
   opacity: 0.02;
   font-size: 3rem;
   user-select: none;
+  color: var(--accent);
+  color: #b76cff;
+}
+
+/* Glow on code blocks */
+pre {
+  border: 1px solid var(--border);
+  box-shadow: 0 0 24px var(--glow);
+}
+
+/* Nav override */
+nav {
+  background-color: rgba(10, 0, 16, 0.92) !important;
+  border-bottom: 1px solid var(--border);
 }
